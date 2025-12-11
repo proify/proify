@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>iframe全屏简洁版</title>
+    <style>
+        body { margin: 0; padding: 20px; }
+        .iframe-container { position: relative; width: 100%; height: 400px; }
+        iframe { width: 100%; height: 100%; border: 1px solid #ccc; }
+        .controls { margin: 15px 0; }
+        button { padding: 10px 20px; margin: 5px; }
+        .fullscreen { 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100vw; height: 100vh; 
+            z-index: 9999; 
+        }
+    </style>
+</head>
+<body>
+    <h2>iframe全屏演示</h2>
+    
+    <div class="controls">
+        <button onclick="enterIframeFullscreen()">iframe全屏</button>
+        <button onclick="enterPageFullscreen()">整个页面全屏</button>
+        <button onclick="exitFullscreen()">退出全屏</button>
+    </div>
+    
+    <div class="iframe-container" id="iframeContainer">
+        <iframe id="myIframe" src="https://qq" title="示例"></iframe>
+    </div>
+    
+    <script>
+        function enterIframeFullscreen() {
+            const container = document.getElementById('iframeContainer');
+            if (container.requestFullscreen) {
+                container.requestFullscreen();
+            } else if (container.webkitRequestFullscreen) {
+                container.webkitRequestFullscreen();
+            } else if (container.mozRequestFullScreen) {
+                container.mozRequestFullScreen();
+            } else if (container.msRequestFullscreen) {
+                container.msRequestFullscreen();
+            }
+        }
+        
+        function enterPageFullscreen() {
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+        }
+        
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    </script>
+</body>
+</html>
